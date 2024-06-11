@@ -1,3 +1,4 @@
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -7,3 +8,4 @@ export default defineNuxtConfig({
     head: { bodyAttrs: { class: 'w-full' }, htmlAttrs: { class: 'w-full' } },
   },
 });
+

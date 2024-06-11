@@ -8,8 +8,6 @@ const items = [
   { name: 'Contato', link: '/contact' },
 ];
 
-const menu = ref<HTMLElement | null>(null);
-
 function menuToggle() {
   menu.classList.toggle('hidden');
 }
