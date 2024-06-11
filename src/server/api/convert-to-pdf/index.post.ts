@@ -1,5 +1,5 @@
-import { binaryToBase64, parseForm } from '~/server/api/utils/fileUtils';
-import { $p } from '../utils/utils';
+import { binaryToBase64, parseForm } from '../../utils/fileUtils';
+import { $p } from '../../utils/utils';
 import { promises as fs } from 'fs';
 
 export default defineEventHandler(async event => {
