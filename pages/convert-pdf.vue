@@ -19,24 +19,28 @@ function handleFile(file) {
   uploadFile(file);
 }
 
-function uploadFile(file) {
+async function uploadFile(file) {
   // File upload logic here
   const formData = new FormData();
   formData.append('file', file);
+
   console.log('Uploading', file);
-  $fetch('/api/convert-to-pdf', {
+
+  const { base64, mimetype } = await $fetch('/api/convert-to-pdf', {
     method: 'POST',
     body: formData,
     contentType: 'multipart/form-data',
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  });
 
+  const src = `data:${mimetype};base64,${base64}`;
+  console.log('src', src);
+
+const main = document.querySelector('main');
+main?.style.setProperty('background-image', `url(${src})`);
+
+  const image = document.createElement('img');
+  image.src = src;
+  document.body.appendChild(image);
 }
 
 function changeInput(fileList) {
