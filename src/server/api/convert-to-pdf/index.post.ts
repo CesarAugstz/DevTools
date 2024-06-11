@@ -1,6 +1,7 @@
-import { binaryToBase64, parseForm } from '../../utils/fileUtils';
-import { $p } from '../../utils/utils';
+import { eq } from 'drizzle-orm';
 import { promises as fs } from 'fs';
+import { db } from '~/server/db/postgres';
+import { user } from '~/server/db/schema';
 
 export default defineEventHandler(async event => {
   const [data, error] = await $p(parseForm(event));
@@ -12,12 +13,17 @@ export default defineEventHandler(async event => {
 
   console.log('Data:', data);
 
-  const file = data?.files?.file[0];
+
+  const file = data?.files?.file?.at(0);
 
   if (!file) {
     console.error('No file uploaded');
     throw createError('No file uploaded');
   }
+
+  const users = await db.select().from(user);
+
+  console.log('Users:', users);
 
   const fileContent = await fs.readFile(file.filepath, 'base64');
 

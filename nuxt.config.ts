@@ -1,7 +1,6 @@
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  srcDir: 'src/',
+  srcDir: 'src',
   devtools: { enabled: true },
   modules: ['@nuxt/ui'],
   colorMode: { preference: 'system', fallback: 'light' },
@@ -9,4 +8,3 @@ export default defineNuxtConfig({
     head: { bodyAttrs: { class: 'w-full' }, htmlAttrs: { class: 'w-full' } },
   },
 });
-
