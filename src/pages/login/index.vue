@@ -1,16 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ title: 'Login', description: 'Login page', layout: false });
 
-const loading = ref(false);
-const { username, password } = reactive({ username: '', password: '' });
-
-function login() {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-  console.log('Logging in...');
-}
+const isSingup = ref(false);
 </script>
 <template>
   <div class="flex min-h-screen">
@@ -20,32 +11,16 @@ function login() {
           <h1 class="text-lg">Hello there!</h1>
           <p>Welcome to the login page</p>
         </template>
-        <form @submit.prevent="login">
-          <UInput class="mb-4" v-model="username" placeholder="Username" />
-          <UInput
-            class="mb-4"
-            v-model="password"
-            placeholder="Password"
-            type="password"
-          />
-          <UButton
-            class="w-full justify-center"
-            :loading="loading"
-            :ui="{ rounded: 'rounded-full' }"
-            size="lg"
-            type="submit"
-            >Login</UButton
-          >
-        </form>
+        <AppLoginForm v-show="!isSingup" />
+        <AppSingupForm v-show="isSingup" />
         <template #footer>
           <p>
-            Don't have an account?
-            <ULink
-              class="text-primary hover:tranlate-y-1 hover:scale-50"
-              to="/register"
-            >
-              Register
-            </ULink>
+            {{
+              isSingup ? 'Already have an account?' : "Don't have an account?"
+            }}
+            <UButton color="gray" variant="link" @click="isSingup = !isSingup"
+              >{{ isSingup ? 'Login' : 'Sing Up' }}
+            </UButton>
           </p>
         </template>
       </UCard>

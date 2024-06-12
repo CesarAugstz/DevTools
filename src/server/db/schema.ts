@@ -1,12 +1,18 @@
-import { serial, text, timestamp, pgTable } from "drizzle-orm/pg-core";
+import { serial, text, timestamp, pgTable, boolean } from 'drizzle-orm/pg-core';
 
-export const user = pgTable("user", {
-  id: serial("id").primaryKey(),
-  name: text("name"),
-  email: text("email"),
-  password: text("password"),
-  role: text("role").$type<"admin" | "customer">(),
-  createdAt: timestamp("created_at"),
-  updatedAt: timestamp("updated_at"),
+export const User = pgTable('User', {
+  id: serial('id').primaryKey(),
+  name: text('name'),
+  email: text('email').notNull().unique(),
+  password: text('password'),
+  role: text('role').$type<'admin' | 'customer'>().default('customer'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
 });
 
+export const AppConfig = pgTable('AppConfig', {
+  id: serial('id').primaryKey(),
+  allowSingup: boolean('allow_signup').default(false),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});

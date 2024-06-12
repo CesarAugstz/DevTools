@@ -12,6 +12,7 @@
     "d:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.3.13",
     "@nuxt/ui": "latest",
     "drizzle-orm": "^0.31.2",
     "formidable": "^3.5.1",
@@ -28,6 +29,7 @@
     "autoprefixer": "^10.4.19",
     "drizzle-kit": "^0.22.7",
     "nuxt-icon": "^0.6.10",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vue-tsc": "^1"
   }
 }

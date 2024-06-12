@@ -1,7 +1,6 @@
-import { eq } from 'drizzle-orm';
 import { promises as fs } from 'fs';
 import { db } from '~/server/db/postgres';
-import { user } from '~/server/db/schema';
+import { User } from '~/server/db/schema';
 
 export default defineEventHandler(async event => {
   const [data, error] = await $p(parseForm(event));
@@ -21,7 +20,7 @@ export default defineEventHandler(async event => {
     throw createError('No file uploaded');
   }
 
-  const users = await db.select().from(user);
+  const users = await db.select().from(User);
 
   console.log('Users:', users);
 
